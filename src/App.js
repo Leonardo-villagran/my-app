@@ -39,12 +39,24 @@ function App() {
         counter: index + 1,
         url: 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/' + (index+1) + '.png', };
     });
-    setNuevaLista(itemsWithCounter);
+
+    const sortedData = itemsWithCounter.sort((a, b) => {
+      if (a.name < b.name) {
+        return -1;
+      }
+      if (a.name > b.name) {
+        return 1;
+      }
+      return 0;
+    });
+
+
+    setNuevaLista(sortedData);
   }, [pokemonList]);
 
 
   const globalState = { nuevaLista, setNuevaLista };
-  
+   //<BrowserRouter basename='/pokemones'>
   return (
     <div className="App">
       <Context.Provider value={ globalState }>
